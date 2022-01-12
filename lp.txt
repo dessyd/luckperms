@@ -1,0 +1,17 @@
+lp user ShingouzAndCo permission set luckperms.* true 
+lp creategroup admin
+lp user ShingouzAndCo parent add admin
+lp group admin permission set minecraft.* true
+lp group admin permission set bungeecord.* true
+lp creategroup mod
+lp group mod parent add default
+lp group mod permission set minecraft.command.list true
+lp group mod permission set minecraft.command.say true
+lp group mod permission set minecraft.command.whitelist true
+lp group mod permission set minecraft.command.spreadplayers true
+lp group default permission set bungeecord.command.server true
+lp group default permission set bungeecord.command.list true
+lp group default permission set minecraft.command.give true
+lp group default permission set minecraft.command.help true
+lp group default permission set minecraft.command.me true
+lp group default permission set minecraft.command.msg true

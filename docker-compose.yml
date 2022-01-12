@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  mc:
+    image: itzg/minecraft-server
+    ports:
+      - "25565:25565"
+    volumes:
+      - mc-data:/data
+      - ./mods.txt:/extras/mods.txt:ro
+      - ./config:/config
+    depends_on:
+      - db
+    environment:
+      TZ: Europe/Brussels
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "testing"
+      RCON_PORT: 28016
+      # enable env variable replacement
+      REPLACE_ENV_VARIABLES: "TRUE"
+      REMOVE_OLD_MODS: "TRUE"
+      MODS_FILE: /extras/mods.txt
+      COPY_CONFIG_DEST: /data/plugins/LuckPerms
+      # define an optional prefix for your env variables you want to replace
+      ENV_VARIABLE_PREFIX: "CFG_"
+      # and here are the actual variables
+      CFG_DB_HOST: "${DB_HOST}"
+      CFG_DB_PORT: "${DB_PORT}"
+      CFG_DB_NAME: "${DB_NAME}"
+      CFG_DB_USER: "${DB_USER}"
+      CFG_DB_PASSWORD_USER_FILE: "/run/secrets/password_user"
+    restart: unless-stopped
+    secrets:
+      - password_user
+  db:
+    image: mariadb
+    hostname: ${DB_HOST}
+    environment:
+      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/password_root
+      - MARIADB_DATABASE=${DB_NAME}
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_PASSWORD_FILE=/run/secrets/password_user
+    volumes:
+      - db-data:/var/lib/mysql
+    secrets:
+      - password_root
+      - password_user
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  mc-data:
+  db-data:
+
+secrets:
+  password_root:
+    file: .secret_password_root
+  password_user:
+    file: .secret_password_user
