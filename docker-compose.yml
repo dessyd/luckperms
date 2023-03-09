@@ -15,8 +15,8 @@ services:
       TZ: Europe/Brussels
       EULA: "TRUE"
       TYPE: "PAPER"
-      ENABLE_RCON: "true"
-      RCON_PASSWORD: "testing"
+      ENABLE_RCON: "TRUE"
+      RCON_PASSWORD: "${RCON_PASSWORD}"
       RCON_PORT: 28016
       # enable env variable replacement
       REPLACE_ENV_VARIABLES: "TRUE"
