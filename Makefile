@@ -3,7 +3,7 @@ SHELL = bash
 
 .env:
 	echo "Create $@ from template"
-	envsubst < tpl$@ | op inject -f > $@ && chmod 600 $@
+	op inject -f -i tpl.env > $@ && chmod 600 $@
 
 env: .env
 

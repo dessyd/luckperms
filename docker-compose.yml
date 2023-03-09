@@ -38,14 +38,13 @@ services:
     image: mariadb
     hostname: ${DB_HOST}
     environment:
-      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/password_root
+      - MARIADB_ROOT_PASSWORD_FILE=${DB_ROOT_PASSWORD}
       - MARIADB_DATABASE=${DB_NAME}
       - MARIADB_USER=${DB_USER}
       - MARIADB_PASSWORD_FILE=/run/secrets/password_user
     volumes:
       - db-data:/var/lib/mysql
     secrets:
-      - password_root
       - password_user
 
   adminer:
