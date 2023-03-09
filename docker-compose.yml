@@ -30,22 +30,19 @@ services:
       CFG_DB_PORT: "${DB_PORT}"
       CFG_DB_NAME: "${DB_NAME}"
       CFG_DB_USER: "${DB_USER}"
-      CFG_DB_PASSWORD_USER_FILE: "/run/secrets/password_user"
+      CFG_DB_PASSWORD_USER: "${DB_USER_PASSWORD}"
     restart: unless-stopped
-    secrets:
-      - password_user
+
   db:
     image: mariadb
     hostname: ${DB_HOST}
     environment:
-      - MARIADB_ROOT_PASSWORD_FILE=${DB_ROOT_PASSWORD}
-      - MARIADB_DATABASE=${DB_NAME}
-      - MARIADB_USER=${DB_USER}
-      - MARIADB_PASSWORD_FILE=/run/secrets/password_user
+      MARIADB_ROOT_PASSWORD_FILE: "${DB_ROOT_PASSWORD}"
+      MARIADB_DATABASE: "${DB_NAME}"
+      MARIADB_USER: "${DB_USER}"
+      MARIADB_PASSWORD_FILE: "${DB_USER_PASSWORD}"
     volumes:
       - db-data:/var/lib/mysql
-    secrets:
-      - password_user
 
   adminer:
     image: adminer
@@ -56,9 +53,3 @@ services:
 volumes:
   mc-data:
   db-data:
-
-secrets:
-  password_root:
-    file: .secret_password_root
-  password_user:
-    file: .secret_password_user
