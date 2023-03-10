@@ -19,7 +19,7 @@ services:
       ENABLE_RCON: "TRUE"
       RCON_PASSWORD: "${RCON_PASSWORD}"
       RCON_PORT: 28016
-      OPS: CrunchySteam213
+      OPS: ${OPS}
       # enable env variable replacement
       REPLACE_ENV_VARIABLES: "TRUE"
       REMOVE_OLD_MODS: "TRUE"
@@ -34,6 +34,25 @@ services:
       CFG_DB_USER: "${DB_USER}"
       CFG_DB_ENGINE: "${DB_ENGINE}"
       CFG_DB_PASSWORD_USER: "${DB_USER_PASSWORD}"
+      RCON_CMDS_STARTUP: |-
+        lp user ${OPS} permission set luckperms.* true 
+        lp creategroup admin
+        lp user ${OPS} parent add admin
+        lp group admin permission set minecraft.* true
+        lp group admin permission set bungeecord.* true
+        lp creategroup mod
+        lp group mod parent add default
+        lp group mod permission set minecraft.command.list true
+        lp group mod permission set minecraft.command.say true
+        lp group mod permission set minecraft.command.whitelist true
+        lp group mod permission set minecraft.command.spreadplayers true
+        lp group default permission set bungeecord.command.server true
+        lp group default permission set bungeecord.command.list true
+        lp group default permission set minecraft.command.give true
+        lp group default permission set minecraft.command.help true
+        lp group default permission set minecraft.command.me true
+        lp group default permission set minecraft.command.msg true
+
     restart: unless-stopped
 
   db:
