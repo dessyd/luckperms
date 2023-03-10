@@ -19,6 +19,7 @@ services:
       ENABLE_RCON: "TRUE"
       RCON_PASSWORD: "${RCON_PASSWORD}"
       RCON_PORT: 28016
+      OPS: CrunchySteam213
       # enable env variable replacement
       REPLACE_ENV_VARIABLES: "TRUE"
       REMOVE_OLD_MODS: "TRUE"
@@ -31,6 +32,7 @@ services:
       CFG_DB_PORT: "${DB_PORT}"
       CFG_DB_NAME: "${DB_NAME}"
       CFG_DB_USER: "${DB_USER}"
+      CFG_DB_ENGINE: "${DB_ENGINE}"
       CFG_DB_PASSWORD_USER: "${DB_USER_PASSWORD}"
     restart: unless-stopped
 
@@ -44,12 +46,6 @@ services:
       MARIADB_PASSWORD: "${DB_USER_PASSWORD}"
     volumes:
       - db-data:/var/lib/mysql
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
 
 volumes:
   mc-data:
