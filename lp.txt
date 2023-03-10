@@ -1,6 +1,6 @@
-lp user ShingouzAndCo permission set luckperms.* true 
+lp user CrunchySteam213 permission set luckperms.* true 
 lp creategroup admin
-lp user ShingouzAndCo parent add admin
+lp user CrunchySteam213 parent add admin
 lp group admin permission set minecraft.* true
 lp group admin permission set bungeecord.* true
 lp creategroup mod

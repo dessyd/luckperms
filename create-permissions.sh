@@ -2,7 +2,8 @@
 RCON_HOST=mc
 
 exec_rcon () {
-  docker compose exec $RCON_HOST rcon-cli $*
+  docker compose exec -i $RCON_HOST rcon-cli $*
+  sleep 1
 }
 
 while IFS= read -r line

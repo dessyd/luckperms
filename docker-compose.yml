@@ -15,6 +15,7 @@ services:
       TZ: Europe/Brussels
       EULA: "TRUE"
       TYPE: "PAPER"
+      MOTD: "A Luck enbled server"
       ENABLE_RCON: "TRUE"
       RCON_PASSWORD: "${RCON_PASSWORD}"
       RCON_PORT: 28016
@@ -37,10 +38,10 @@ services:
     image: mariadb
     hostname: ${DB_HOST}
     environment:
-      MARIADB_ROOT_PASSWORD_FILE: "${DB_ROOT_PASSWORD}"
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
       MARIADB_DATABASE: "${DB_NAME}"
       MARIADB_USER: "${DB_USER}"
-      MARIADB_PASSWORD_FILE: "${DB_USER_PASSWORD}"
+      MARIADB_PASSWORD: "${DB_USER_PASSWORD}"
     volumes:
       - db-data:/var/lib/mysql
 
