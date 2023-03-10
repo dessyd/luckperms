@@ -26,6 +26,8 @@ services:
       CFG_DB_USER: "${DB_USER}"
       CFG_DB_ENGINE: "${DB_ENGINE}"
       CFG_DB_PASSWORD_USER: "${DB_USER_PASSWORD}"
+      CFG_RABBIT_HOST: "${RABBIT_HOST}"
+      CFG_RABBIT_PORT: "${RABBIT_PORT}"
       RCON_CMDS_STARTUP: |-
         lp user ${OPS} permission set luckperms.* true
         lp group default setdisplayname Players
@@ -60,6 +62,13 @@ services:
       MARIADB_PASSWORD: "${DB_USER_PASSWORD}"
     volumes:
       - db-data:/var/lib/mysql
+
+  # rabbitmq:
+  #   image: rabbitmq:3
+  #   hostname: ${RABBIT_HOST}
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: ${DB_USER}
+  #     RABBITMQ_DEFAULT_PASS: ${DB_USER_PASSWORD}
 
 volumes:
   mc-data:
