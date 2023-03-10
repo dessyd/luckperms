@@ -27,23 +27,23 @@ services:
       CFG_DB_ENGINE: "${DB_ENGINE}"
       CFG_DB_PASSWORD_USER: "${DB_USER_PASSWORD}"
       RCON_CMDS_STARTUP: |-
-        lp user ${OPS} permission set luckperms.* true 
-        lp creategroup admin
-        lp user ${OPS} parent add admin
-        lp group admin permission set minecraft.* true
-        lp group admin permission set bungeecord.* true
+        lp user ${OPS} permission set luckperms.* true
+        lp group default setdisplayname Players
+        lp group default permission set minecraft.command.say true
+        lp group default permission set minecraft.command.me true
         lp creategroup mod
         lp group mod parent add default
+        lp group mod setdisplayname Moderators
+        lp group mod permission set minecraft.command.mute true
+        lp group mod permission set minecraft.command.unmute true
         lp group mod permission set minecraft.command.list true
-        lp group mod permission set minecraft.command.say true
         lp group mod permission set minecraft.command.whitelist true
         lp group mod permission set minecraft.command.spreadplayers true
-        lp group default permission set bungeecord.command.server true
-        lp group default permission set bungeecord.command.list true
-        lp group default permission set minecraft.command.give true
-        lp group default permission set minecraft.command.help true
-        lp group default permission set minecraft.command.me true
-        lp group default permission set minecraft.command.msg true
+        lp creategroup admin
+        lp group admin parent add mod
+        lp group admin setdisplayname Admins
+        lp group admin permission set minecraft.command.ban true
+        lp group admin permission set minecraft.command.pardon true
 
     restart: unless-stopped
 
