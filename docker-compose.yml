@@ -44,6 +44,9 @@ services:
         lp group admin setdisplayname Admins
         lp group admin permission set minecraft.command.ban true
         lp group admin permission set minecraft.command.pardon true
+        lp user ShingouzAndCo parent add mod
+        lp user Geeecko parent add mod
+        lp user Deezys parent add mod
 
     restart: unless-stopped
 
