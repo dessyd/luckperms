@@ -8,14 +8,14 @@ SHELL = bash
 env: .env
 
 up: env
-	echo "Powering up"
-	docker compose up -d
+	echo "Powering $@"
+	docker compose $@ -d
 
 down:
-	echo "Powering down"
-	docker compose down
+	echo "Powering $@"
+	docker compose $@
 
-clean: env
+clean: 
 	echo "Powering down and clean"
 	docker compose down	-v
 	rm -f .env
