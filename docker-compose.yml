@@ -11,20 +11,12 @@ services:
       - ./config:/config
     depends_on:
       - db
+    env_file: mc.env 
     environment:
-      TZ: Europe/Brussels
-      EULA: "TRUE"
-      TYPE: "PAPER"
-      MOTD: "A Luck enbled server"
-      ENABLE_RCON: "TRUE"
+
       RCON_PASSWORD: "${RCON_PASSWORD}"
-      RCON_PORT: 28016
       OPS: ${OPS}
-      # enable env variable replacement
-      REPLACE_ENV_VARIABLES: "TRUE"
-      REMOVE_OLD_MODS: "TRUE"
-      MODS_FILE: /extras/mods.txt
-      COPY_CONFIG_DEST: /data/plugins/LuckPerms
+
       # define an optional prefix for your env variables you want to replace
       ENV_VARIABLE_PREFIX: "CFG_"
       # and here are the actual variables
