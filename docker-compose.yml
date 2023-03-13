@@ -29,7 +29,7 @@ services:
       CFG_RABBIT_HOST: "${RABBIT_HOST}"
       CFG_RABBIT_PORT: "${RABBIT_PORT}"
       RCON_CMDS_STARTUP: |-
-        lp user ${OPS} permission set luckperms.* true
+        lp user ${LP_ADMIN} permission set luckperms.* true
         lp group default setdisplayname Players
         lp group default permission set minecraft.command.say true
         lp group default permission set minecraft.command.me true
@@ -46,9 +46,6 @@ services:
         lp group admin setdisplayname Admins
         lp group admin permission set minecraft.command.ban true
         lp group admin permission set minecraft.command.pardon true
-        lp user ShingouzAndCo parent add mod
-        lp user Geeecko parent add mod
-        lp user Deezys parent add mod
 
     restart: unless-stopped
 
